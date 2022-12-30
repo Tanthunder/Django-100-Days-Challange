@@ -1,0 +1,14 @@
+psycopg2 connector required for connecting to postgres via python/django .
+pip install psycopg2
+before migrations / migrate create database in postgres 
+
+imp steps:
+configure postgres db in settings.py file.
+
+we can also connect to postgres via python code without django.
+refer to connection.py file.
+connnect to postgres , create cursor.
+Using this cursor we can run different queries on postgres db.
+
+Note that i have fetched postgres db user and password from my local environment variables.
+I have setup POSTGRES_DB_USER and POSTGRES_DB_PAS in my local env variables,  i am  just accessing them using os module.
