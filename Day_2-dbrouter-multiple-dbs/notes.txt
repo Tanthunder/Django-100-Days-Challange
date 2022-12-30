@@ -1,0 +1,33 @@
+default in DATABASES settings is mandatory and it has special significance. If you dont want to use it , keep it as blank dict.
+
+Default routinng scheme is provided ‘out of the box’ on every Django project.
+However, if you want to implement more interesting database allocation behaviors, you can define and install your own database routers.
+
+if we keep default as blank, it is mandatory to provide extra parameter while executing commands like migrate and createsuperuser (makemigrations is exception)
+as by default django will operate on default db and as it is blank will throw error.
+e.g  python manage.py migrate --database = name
+
+Database routers
+provides up to four methods:
+1.db_for_read(model, **hints)
+2.db_for_write(model, **hints)
+3.allow_relation(obj1, obj2, **hints)
+4.allow_migrate(db, app_label, model_name=None, **hints)
+
+i have used both sqlite dbs but we can use different dbs like postgres, mysql etc.
+
+reference : https://docs.djangoproject.com/en/4.1/topics/db/multi-db/
+
+imp steps :
+In settings.py configure DATABASE and DATABASE_ROUTERS.
+create dbRouters.py file having classes for db roouters.
+
+Django also provides an API that allows Manually selecting a database .
+A manually specified database allocation will take priority over a database allocated by a router.
+use using() for this purpose.
+using() takes a single argument: the alias of the database on which you want to run the query
+example : my_object.save(using='legacy_users')
+
+Django’s admin doesn’t have any explicit support for multiple databases. If you want to provide an admin interface for a model on a database other than that specified by your router chain, you’ll need to write custom ModelAdmin classes that will direct the admin to use a specific database for content.
+
+Django doesn’t currently provide any support for foreign key or many-to-many relationships spanning multiple databases
