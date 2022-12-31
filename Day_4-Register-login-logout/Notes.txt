@@ -1,0 +1,40 @@
+Register :
+
+Django provides built in User model but it is good practice to create your own user model considering future needs.
+For custom user model use  AUTH_USER_MODEL = 'app1.CustomUser' in settings.py (appname.modelname)
+
+1.
+created CustomUser model inherited from abstract user
+created custom registratation form inherited from UserCreationForm and in meta passed model = CustomUser
+
+2.
+created CustomUser model inherited from abstract user
+created custom registratation form inherited from UserCreationForm and in meta passed model = User
+error thrown : Manager isn't available; 'auth.User' has been swapped for 'app1.CustomUser'
+because in settings.py we have used AUTH_USER_MODEL = 'app1.CustomUser'
+
+3.
+created CustomUser model inherited from abstract user
+created custom registratation form using ModelForm but it will throw field error for password1, password2 fields as those are the part of UserCreationForm.
+so you need to inherite custom registratation form with both . class ModelCustomUserCreationForm(UserCreationForm , ModelForm)...order is important.
+
+
+Login:
+
+create view/url/template for login. (make sure view name is not 'login')
+django provides built-in AuthenticationForm for login.
+create object/instance of it , retrieve username and password from it.
+pass this username and password to django's authenticate method , it will return user if evrything is fine otherwise None.
+pass this user to django's login method for logging in the user.
+Django by default uses session based authentication.It actually crates session in session table.
+If you see your browsers cookie , you will find session key there.
+
+It is not mandatory to use django's AuthenticationForm , alternatively you can pass username and password from front end using normal form post request (use name attribute.)
+Then fetch this data using name in views and proceed further.
+
+Logout:
+Pass request to django's logout method.
+It clears session from session table.
+session key in browser's  key will also get deleted.
+
+Django also provides class based login, logout views.
