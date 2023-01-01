@@ -1,0 +1,12 @@
+2 step authentication using code sent on email.
+
+flow:
+Whenever user tries to login/register, generate new code with the help of signals.
+After authentication send email with verification code.
+Verify code befor calling login function.
+
+Imp points:
+utils.py for sending mail
+settings.py for mail settings
+post_save signal for generating code and overriding save method.
+
