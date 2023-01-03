@@ -1,0 +1,11 @@
+Basic CRUD operation in django
+
+Create model
+To retrive all the data : ModelName.ModelManagerName.all()
+To retrive specific object's data : ModelName.ModelManagerName.get(modelfield=value)
+To update specific object's data : render form with isntance data, modify and then save form.
+To create new record : utilize model form , submit form data , save it in view.
+To delete specific data : use .delete() method
+
+For updating, deleting and retriving specific data we need to pass extra parameter along with request to view.
+Corresponding changes required in urls.

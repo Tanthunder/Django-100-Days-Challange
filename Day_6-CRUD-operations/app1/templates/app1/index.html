@@ -1,0 +1,11 @@
+<h1>Students data</h1>
+
+<div>
+    {% for data in student_data %}
+    name : {{data.name}}
+    age : {{data.age}}
+    address : {{data.address}}
+    email :{{data.email}} 
+    <br>
+    {%endfor%}
+</div>
