@@ -1,0 +1,21 @@
+Django provides multiple built-in commands like runserver, collectstatic, migrate etc.
+We can also create our own custom management commands which can then be use in a similar way as we use built-in commands.
+
+Implementing/creating custom command:
+1. Create 'management' folder inside particular app directory.
+2. Inside 'management' directory create 'commands' directory.
+3. Inside it create .py file with the name which you want to use as command. (Make sure name does not start with _).
+   In our case 'student_count_cmd' is the file name which will provide total number of students in Student model/table.
+   So we can execute the command as 'python manage.py student_count_cmd'.
+
+Passing arguments to command:
+Django uses the argparse module to handle the custom arguments. We need to define a function add_arguments under the command class to handle arguments.
+Inside add_arguments use parser.add_argument() to add arguments.
+We can pass positional and optional arguemnts.
+-- before name indicates optional argument.
+In our get_student_with_age_start_character command ,age is positional argument and --startwith is optional argument.
+Positional argument is required.
+
+Example:
+python manage.py get_student_with_age_start_character 5 --startwith 's'
+This will provide Student queryset having age greater than 5 and name starting with 's'.
